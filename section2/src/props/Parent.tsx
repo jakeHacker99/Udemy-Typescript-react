@@ -4,16 +4,13 @@ import   Child, {Child2}  from "./Child"
 const Parent = () => {
     return (
         <div>
-        <Child  color="purple"  onClick={() => console.log("clicked")} >
+        {/* <Child  color="purple"  onClick={() => console.log("clicked")} >
             124
-        </Child>
-        <div>
+        </Child> */}
 
 
         <Child2  color="purple"  onClick={() => console.log("clicked")} >
-            124
         </Child2>
-        </div>
         </div>
     )
 }

@@ -1,12 +1,12 @@
+import React from 'react'
 import ReactDOM from "react-dom"
 
-
-import React from 'react'
+import GuestList from "./state/GuestList"
 
 function App() {
     return (
         <div>
-            <h1>Hi there!</h1>
+            <GuestList/>
         </div>
     )
 }
