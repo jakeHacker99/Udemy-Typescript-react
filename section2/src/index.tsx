@@ -2,11 +2,14 @@ import React from 'react'
 import ReactDOM from "react-dom"
 
 import GuestList from "./state/GuestList"
+import UserSearch from './state/UserSearch'
+
 
 function App() {
     return (
         <div>
-            <GuestList/>
+            {/* <GuestList/> */}
+            <UserSearch/>
         </div>
     )
 }
