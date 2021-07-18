@@ -11,14 +11,15 @@ export const searchRepositories = (term: string) => {
         })
 
         try {
-            const { data } = await axios.get("https://jsonplaceholder.typicode.com/comments", {
+            const { data } = await axios.get("https://pokeapi.co/api/v2/pokemon/", {
                 params: {
                     text: term
                 }
             })
 
-            const names = data.objects.map((res: any) => {
-                return res.id.name
+            const names = data.results.map((res: any) => {
+
+                return res.name.concat(" ")
             })
             dispatch({
                 type: ActionType.SEARCH_REPOSITORIES_SUCCESS,
