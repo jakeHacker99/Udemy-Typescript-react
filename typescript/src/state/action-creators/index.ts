@@ -11,14 +11,14 @@ export const searchRepositories = (term: string) => {
         })
 
         try {
-            const { data } = await axios.get("https://registry.npmjs.org/-/v1/search", {
+            const { data } = await axios.get("https://jsonplaceholder.typicode.com/comments", {
                 params: {
                     text: term
                 }
             })
 
             const names = data.objects.map((res: any) => {
-                return res.package.name
+                return res.id.name
             })
             dispatch({
                 type: ActionType.SEARCH_REPOSITORIES_SUCCESS,
