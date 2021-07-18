@@ -3,9 +3,16 @@ interface RepositoriesState{
     error: string |null,
     data: string[]
 }
-interface Action {
-    type: string,
-    payload?: any
+interface SearchRepositoriesAction{
+    type: "search_repositories"
+}
+interface SearchRepositoriesSuccessAction{
+    type: "search_repositories_success",
+    payload: string[]
+}
+interface SearchRepositoriesErrorAction{
+    type: "search_repositories_error",
+    payload: string
 }
 
 
