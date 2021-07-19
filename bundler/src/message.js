@@ -1,1 +1,1 @@
-module.exports("Hi there David 🧑")
+export default("Hi there David 🧑")
