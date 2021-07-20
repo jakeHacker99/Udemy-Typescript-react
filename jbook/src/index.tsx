@@ -1,25 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import ReactDOM from "react-dom";
 import * as esbuild from "esbuild-wasm";
+import { unpkgPathPlugin } from "./plugins/unpkg-path-plugin";
 
 const App = () => {
+  const ref = useRef<any>();
   const [input, setInput] = useState("");
   const [code, setCode] = useState("");
 
   const startService = async () => {
-    const service = await esbuild.startService({
+    ref.current = await esbuild.startService({
       worker: true,
       wasmURL: "/esbuild.wasm",
     });
-    console.log(service);
   };
 
   useEffect(() => {
     startService();
   }, []);
 
-  const onClick = () => {
-    console.log(input);
+  const onClick = async () => {
+    if (!ref.current) {
+      return;
+    }
+
+    const result = await ref.current.build({
+      entryPoints: ["index.js"],
+      bundle: true,
+      write: false,
+      plugins: [unpkgPathPlugin()],
+    });
+    // console.log(result);
+    setCode(result.outputFiles[0].text);
   };
 
   return (
@@ -31,7 +43,7 @@ const App = () => {
       <div>
         <button onClick={onClick}>Submit me</button>
       </div>
-      <pre></pre>
+      <pre> {code} </pre>
     </div>
   );
 };
