@@ -9,7 +9,7 @@ const fileCacha = localforage.createInstance({
 
 
 
-export const unpkgPathPlugin = (inputCode: string) => {
+export const unpkgPathPlugin = () => {
     return {
         name: 'unpkg-path-plugin',
         setup(build: esbuild.PluginBuild) {
@@ -41,35 +41,6 @@ export const unpkgPathPlugin = (inputCode: string) => {
                 }
             });
 
-
-            build.onLoad({ filter: /.*/ }, async (args: any) => {
-                console.log('onLoad', args);
-
-                if (args.path === 'index.js') {
-                    return {
-                        loader: 'jsx',
-                        contents: inputCode,
-                    };
-                }
-
-                const cachedResult = await fileCacha.getItem<esbuild.OnLoadResult>(args.path)
-
-                if (cachedResult) {
-                    return cachedResult
-                }
-
-                const { data, request } = await axios.get(args.path)
-
-                const result: esbuild.OnLoadResult = {
-                    loader: "jsx",
-                    contents: data,
-                    resolveDir: new URL("./", request.responseURL).pathname
-                }
-                await fileCacha.setItem(args.path, result)
-
-                return result
-
-            });
         },
     };
 };
