@@ -39,8 +39,8 @@ export const fetchPlugin = (inputCode: string) => {
                 }
 
                 const { data, request } = await axios.get(args.path)
-                const escaped = data.
-                    replace(/\n/g, "")
+                const escaped = data
+                    .replace(/\n/g, "")
                     .replace(/"/g, '\\"')
                     .replace(/'/g, "\\'")
 
