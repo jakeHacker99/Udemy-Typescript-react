@@ -39,7 +39,6 @@ export const Preview: React.FC<PreviewProps> = ({ code }) => {
   return (
     <div className="preview-wrapper">
       <iframe
-        style={{ backgroundColor: "white" }}
         title="iframe"
         ref={iframe}
         sandbox="allow-scripts"
