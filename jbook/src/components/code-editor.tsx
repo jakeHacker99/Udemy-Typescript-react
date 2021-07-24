@@ -37,8 +37,6 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
     );
   };
   const onFormatClick = () => {
-    console.log(editorref.current);
-
     // get value
     const unformatted = editorref.current.getModel().getValue();
 
