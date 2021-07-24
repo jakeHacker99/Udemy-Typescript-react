@@ -40,6 +40,7 @@ export const Preview: React.FC<PreviewProps> = ({ code }) => {
     <div className="preview-wrapper">
       <iframe
         title="iframe"
+        width={window.outerWidth * 0.3}
         ref={iframe}
         sandbox="allow-scripts"
         srcDoc={html}
