@@ -35,7 +35,7 @@ const TextEditor: React.FC = () => {
 
   return (
     <div
-      className="text-editor card"
+      className="text-editor card   "
       onClick={() => setEditing(true)}
       style={{ cursor: "pointer" }}
     >
