@@ -7,7 +7,7 @@ import { ActionType } from './../action-types/index';
 export const updateCell = (id: string, content: string): UpdateCellAction => {
     return {
         type: ActionType.UPATE_CELL,
-        paylaod: { id, content }
+        payload: { id, content }
 
     }
 }
