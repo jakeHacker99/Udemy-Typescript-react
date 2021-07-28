@@ -1,11 +1,13 @@
 import { combineReducers } from "redux";
-import cellReducer from "./cellsReducers";
+import cellsReducer from "./cellsReducers";
 
 const reducers = combineReducers({
-    cells: cellReducer
+    cells: cellsReducer
 })
 
 export default reducers
+
+export type RootState = ReturnType<typeof reducers>;
 
 
 
