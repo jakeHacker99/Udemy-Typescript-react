@@ -1,12 +1,13 @@
-import { updateCell } from './../state/action-creators/index';
-import { useDispatch } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { actionCreators } from "../state"
+import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 
+import { bindActionCreators } from "redux";
+import { actionCreators } from "../state";
 
 export const useActions = () => {
-    const dispatch = useDispatch()
-    return bindActionCreators(actionCreators, dispatch)
+    const dispatch = useDispatch();
+    return useMemo(() => {
 
-}
-
+        return bindActionCreators(actionCreators, dispatch);
+    }, [dispatch]);
+};
