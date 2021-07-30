@@ -1,24 +1,35 @@
 import { CellTypes } from "./../cell";
 import { ActionType } from "./../action-types/index";
-import { ActionCreatorsMapObject, AnyAction } from "redux";
 
-export type Direction = "up" | "down";
 
+export type Direction = 'up' | 'down';
 export interface MoveCellAction {
     type: ActionType.MOVE_CELL;
-    payload: { id: string; direction: Direction };
+    payload: {
+        id: string;
+        direction: Direction;
+    };
 }
+
 export interface DeleteCellAction {
     type: ActionType.DELETE_CELL;
     payload: string;
 }
-export interface IntsertCellAfterAction {
+
+export interface InsertCellAfterAction {
     type: ActionType.INSERT_CELL_AFTER;
-    payload: { id: string | null; type: CellTypes };
+    payload: {
+        id: string | null;
+        type: CellTypes;
+    };
 }
+
 export interface UpdateCellAction {
-    type: ActionType.UPATE_CELL;
-    payload: { id: string; content: string };
+    type: ActionType.UPDATE_CELL;
+    payload: {
+        id: string;
+        content: string;
+    };
 }
 
 export interface BundleStartAction {
@@ -42,7 +53,7 @@ export interface BundleCompleteAction {
 export type Action =
     | MoveCellAction
     | DeleteCellAction
-    | IntsertCellAfterAction
+    | InsertCellAfterAction
     | UpdateCellAction
     | BundleStartAction
     | BundleCompleteAction;

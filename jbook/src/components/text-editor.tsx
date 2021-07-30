@@ -34,7 +34,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
     return (
       <div ref={ref} className="text-editor">
         <MDEditor
-          value={cell.conent}
+          value={cell.content}
           onChange={(v) => updateCell(cell.id, v || "")}
         />
       </div>
@@ -48,7 +48,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
       style={{ cursor: "pointer" }}
     >
       <div className="card-content">
-        <MDEditor.Markdown source={cell.conent || "# Click to edit"} />
+        <MDEditor.Markdown source={cell.content || "# Click to edit"} />
       </div>
     </div>
   );

@@ -2,7 +2,8 @@ import produce from "immer";
 import { Action } from "./../actions/index";
 import { ActionType } from "../action-types";
 
-export interface BundlesState {
+
+interface BundlesState {
     [key: string]:
     | {
         loading: boolean;
@@ -20,11 +21,10 @@ const reducer = produce(
             case ActionType.BUNDLE_START:
                 state[action.payload.cellId] = {
                     loading: true,
-                    code: "",
-                    err: "",
+                    code: '',
+                    err: '',
                 };
                 return state;
-
             case ActionType.BUNDLE_COMPLETE:
                 state[action.payload.cellId] = {
                     loading: false,
@@ -32,7 +32,6 @@ const reducer = produce(
                     err: action.payload.bundle.err,
                 };
                 return state;
-
             default:
                 return state;
         }

@@ -2,7 +2,7 @@ import { Direction, Action, MoveCellAction } from "./../actions/index";
 import { CellTypes } from "./../cell";
 import {
     UpdateCellAction,
-    IntsertCellAfterAction,
+    InsertCellAfterAction,
     DeleteCellAction,
 } from "./../actions";
 import { ActionType } from "./../action-types/index";
@@ -12,29 +12,41 @@ import bundle from "../../bundler";
 
 export const updateCell = (id: string, content: string): UpdateCellAction => {
     return {
-        type: ActionType.UPATE_CELL,
-        payload: { id, content },
+        type: ActionType.UPDATE_CELL,
+        payload: {
+            id,
+            content,
+        },
     };
 };
+
 export const deleteCell = (id: string): DeleteCellAction => {
     return {
         type: ActionType.DELETE_CELL,
         payload: id,
     };
 };
+
 export const moveCell = (id: string, direction: Direction): MoveCellAction => {
     return {
         type: ActionType.MOVE_CELL,
-        payload: { id, direction },
+        payload: {
+            id,
+            direction,
+        },
     };
 };
+
 export const insertCellAfter = (
     id: string | null,
     cellType: CellTypes
-): IntsertCellAfterAction => {
+): InsertCellAfterAction => {
     return {
         type: ActionType.INSERT_CELL_AFTER,
-        payload: { id, type: cellType },
+        payload: {
+            id,
+            type: cellType,
+        },
     };
 };
 
@@ -46,15 +58,14 @@ export const createBundle = (cellId: string, input: string) => {
                 cellId,
             },
         });
+
         const result = await bundle(input);
+
         dispatch({
             type: ActionType.BUNDLE_COMPLETE,
             payload: {
                 cellId,
-                bundle: {
-                    code: result.code,
-                    err: result.err,
-                },
+                bundle: result,
             },
         });
     };
