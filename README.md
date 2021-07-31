@@ -26,6 +26,11 @@ Modules:  {
 ESbuild-Wasm
 
 And much More
+
+Lernia
+
+Commander
+
 ```
 #
 Status: Work In Progess ⌛
