@@ -7,8 +7,11 @@ exports.serve = void 0;
 var path_1 = __importDefault(require("path"));
 var express_1 = __importDefault(require("express"));
 var http_proxy_middleware_1 = require("http-proxy-middleware");
+var cells_1 = require("./routes/cells");
 var serve = function (port, fileName, dir, useProxy) {
     var app = express_1.default();
+    // making the 404
+    app.use(cells_1.createCellsRouter(fileName, dir));
     if (useProxy) {
         app.use(http_proxy_middleware_1.createProxyMiddleware({
             target: "http://localhost:3000",

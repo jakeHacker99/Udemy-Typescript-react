@@ -11,6 +11,11 @@ export const serve = (
 ) => {
     const app = express();
 
+
+    // making the 404
+    app.use(createCellsRouter(fileName, dir))
+
+
     if (useProxy) {
         app.use(
             createProxyMiddleware({
@@ -23,6 +28,7 @@ export const serve = (
         const packagePath = require.resolve("local-client/build/index.html");
         app.use(express.static(path.dirname(packagePath)));
     }
+
     return new Promise<void>((resolve, reject) => {
         app.listen(port, resolve).on("error", reject);
     });

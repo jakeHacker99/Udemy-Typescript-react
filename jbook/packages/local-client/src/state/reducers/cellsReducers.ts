@@ -1,7 +1,8 @@
-import produce from "immer"
-import { Action } from '../actions';
-import { ActionType } from './../action-types/index';
-import { Cell } from './../cell';
+import produce from "immer";
+import { actionCreators } from "..";
+import { Action } from "../actions";
+import { ActionType } from "./../action-types/index";
+import { Cell } from "./../cell";
 interface CellsState {
     loading: boolean;
     error: string | null;
@@ -26,6 +27,32 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
             state.data[id].content = content;
 
             return state;
+
+        case ActionType.SAVE_CELLS_ERROR:
+            state.error = action.payload;
+            return state
+
+        case ActionType.FETCH_CELLS:
+            state.loading = true;
+
+            state.error = null;
+            return state;
+
+
+        case ActionType.FETCH_CELLS_COMPLETE:
+            state.order = action.payload.map((cell) => cell.id);
+            state.data = action.payload.reduce((acc, cell) => {
+                acc[cell.id] = cell;
+                return acc;
+            }, {} as CellsState["data"]);
+
+            return state;
+
+        case ActionType.FETCH_CELLS_ERROR:
+            state.loading = false;
+            state.error = action.payload;
+            return state;
+
         case ActionType.DELETE_CELL:
             delete state.data[action.payload];
             state.order = state.order.filter((id) => id !== action.payload);
@@ -34,7 +61,7 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
         case ActionType.MOVE_CELL:
             const { direction } = action.payload;
             const index = state.order.findIndex((id) => id === action.payload.id);
-            const targetIndex = direction === 'up' ? index - 1 : index + 1;
+            const targetIndex = direction === "up" ? index - 1 : index + 1;
 
             if (targetIndex < 0 || targetIndex > state.order.length - 1) {
                 return state;
@@ -46,7 +73,7 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
             return state;
         case ActionType.INSERT_CELL_AFTER:
             const cell: Cell = {
-                content: '',
+                content: "",
                 type: action.payload.type,
                 id: randomId(),
             };
